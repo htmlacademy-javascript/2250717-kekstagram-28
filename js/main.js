@@ -57,7 +57,7 @@ function generateData() {
 }
 
 // генерация массива из 25 объектов
-const dataArray = generateData();
+// const dataArray = generateData();
 
 // вывод данных в консоль
 // console.log(dataArray);
