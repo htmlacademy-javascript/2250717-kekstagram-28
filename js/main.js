@@ -60,4 +60,4 @@ function generateData() {
 const dataArray = generateData();
 
 // вывод данных в консоль
-console.log(dataArray);
+// console.log(dataArray);
