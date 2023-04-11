@@ -1,79 +1,38 @@
-// Функция для проверки длины строки
+//Функция для проверки длины строки.
+function checkLengthString(string, maxValue) {
+  return (string.length <= maxValue);
+}
+checkLengthString('Строка',8);
 
-function checkStringLength(str, maxLength) {
-  if (str.length <= maxLength) {
-    return true;
-  } else {
-    return false;
-  }
+//Функция для проверки, является ли строка палиндромом.
+function checkStringPolindrom(string){
+  const newString = string.toLowerCase().replaceAll(' ', '');
+  return (string.split('').reverse().join('') === newString);
 }
 
-checkStringLength('проверяемая строка', 20); // true
-checkStringLength('проверяемая строка', 18); // true
-checkStringLength('проверяемая строка', 10); // false
+checkStringPolindrom('Топот');
 
-// Функция для проверки, является ли строка палиндромом
-
-function isPalindrome(str) {
-  // Приводим строку к нижнему регистру
-  str = str.toLowerCase();
-
-  // Запускаем цикл по строке и сравниваем символы с конца и начала
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] !== str[str.length - i - 1]) {
-      // Если символы не совпадают, то это не палиндром
-      return false;
-    }
-  }
-
-  // Если функция дошла до конца, значит строка является палиндромом
-  return true;
-}
-
-isPalindrome('топот'); // true
-isPalindrome('ДовОд'); // true
-isPalindrome('Кекс'); // false
-
-/* Функция, которая принимает строку,
-извлекает содержащиеся в ней цифры от 0 до 9
+/*Функция, которая принимает строку, извлекает содержащиеся в ней цифры от 0 до 9
 и возвращает их в виде целого положительного числа.
-Если в строке нет ни одной цифры, функция должна вернуть NaN */
-
-function extractDigits(str) {
-  const digits = str.match(/[0-9]/g);
-  if (digits === null) {
-    return NaN;
-  } else {
-    return parseInt(digits.join(''), 10);
-  }
+Если в строке нет ни одной цифры, функция должна вернуть NaN:*/
+function getNumbers(string) {
+  // eslint-disable-next-line radix
+  return parseInt(string.toString().replace(/\D/g,''));
 }
+getNumbers('год 2023');
 
-extractDigits('2023 год'); // 2023
-extractDigits('ECMAScript 2022'); // 2022
-extractDigits('1 кефир, 0.5 батона'); // 105
-extractDigits('агент 007'); // 7
-extractDigits('а я томат'); // NaN
-
-/* Функция, которая принимает три параметра:
-исходную строку, минимальную длину и строку
-с добавочными символами — и возвращает исходную строку,
-дополненную указанными символами до заданной длины.
-Символы добавляются в начало строки. Если исходная
-строка превышает заданную длину, она не должна обрезаться.
-Если «добивка» слишком длинная, она обрезается с конца. */
-
-function padString(str, length, pad) {
-  if (str.length >= length) {
+/*
+Функция, которая принимает три параметра: исходную строку, минимальную длину и строку с добавочными символами— и возвращает исходную строку, дополненную указанными символами до заданной длины. Символы добавляются в начало строки. Если исходная строка превышает заданную длину, она не должна обрезаться. Если «добивка» слишком длинная, она обрезается с конца.
+*/
+function padLine(str, minLength, addStr) {
+  if (str.length >= minLength) {
     return str;
-  } else {
-    const padCount = Math.ceil((length - str.length) / pad.length);
-    const padding = pad.repeat(padCount).slice(0, length - str.length);
-    return padding + str;
   }
+  const preffixLength = minLength - str.length;
+  const sample = addStr;
+  while (addStr.length < preffixLength - sample.length) {
+    addStr += addStr;
+  }
+  return sample.slice(0, preffixLength - addStr.length) + addStr + str;
 }
-
-padString('1', 2, '0'); // '01'
-padString('1', 4, '0'); // '0001'
-padString('q', 4, 'werty'); // 'werq'
-padString('q', 4, 'we'); // 'wewq'
-padString('qwerty', 4, '0'); // 'qwerty'
+padLine('qwerty', 4, '0');
